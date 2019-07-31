@@ -1,0 +1,57 @@
+import java.util.Map;
+
+class Playground {
+    /**
+     * Given a map of countries and their population calcualte 
+     * average population in the country.
+     * 
+     * Example:
+     *  calculateAveragePopulation({}) => 0
+     *  calculateAveragePopulation({"Ukraine", 42_000_000}) => 42_000_000
+     *  calculateAveragePopulation({"Ukraine", 42_000_000
+                                    "Moldova", 3_500_00}) => 22_750_000
+     */ 
+    private static int calculateAveragePopulation(Map<String, Integer> population) {
+        // WRITE YOUR CODE BELOW THIS LINE
+        int average = 0;
+        int count = 0;
+        if(population.isEmpty()){
+            average = 0;
+        }else{
+            for(int value : population.values()){
+                average = average + value;
+                count++;
+            }
+            average = average/count;
+        }
+        return average;
+        // WRITE YOUR CODE ABOVE THIS LINE
+    }
+    
+    public static void main(String[ ] args) {
+        test(calculateAveragePopulation(Map.of("Ukraine", 42_000_000)), 42_000_000, "singleCountry");
+        test(calculateAveragePopulation(Map.of()), 0, "emptyArray");
+        test(calculateAveragePopulation(
+            Map.of(
+                "Ukraine", 42_000_000,
+                "Belarus", 9_500_000,
+                "Moldova", 3_500_000,
+                "Switzerland", 8_400_000)), 
+            15_850_000, 
+            "multipleCountries");
+
+    }
+    
+    private static void test(int actual, int expected, String testName) {
+        if (actual != expected) {
+            String errorMessage = String.format(
+                "Test %s failed: %s is not equal to expected %s",
+                testName, 
+                actual,
+                expected);
+            System.out.println("ERROR: " + errorMessage);  
+        } else {
+            System.out.println("SUCCESS: " + testName + " passed");
+        }
+    }
+}
