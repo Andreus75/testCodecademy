@@ -1,0 +1,48 @@
+import java.util.Map;
+
+class Playground {
+    /**
+     * Return true if none the letters in the `blacklist`
+     * are present in the `phrase`. If at least one letter from 
+     * `blacklist` is present in the `phrase` return false;
+     *
+     * Comparison should be case insensitive. Meaning 'A' == 'a'.
+     */ 
+    private static boolean hasNoneLetters(String blacklist, String phrase) {
+        // WRITE YOUR CODE BELOW THIS LINE
+        int count = 0;
+        boolean x = true;
+        char[] chars = blacklist.toLowerCase().toCharArray();
+        char[] chars1 = phrase.toLowerCase().toCharArray();
+        for (char aChar : chars){
+            for (char bChar : chars1){
+                if (aChar == bChar){
+                    count++;
+                    x = false;
+                }
+            }
+        }
+            return x;
+        // WRITE YOUR CODE ABOVE THIS LINE
+    }
+    
+    public static void main(String[ ] args) {
+        test(hasNoneLetters("abcdef", "fgh"), false, "one letter overlap");
+        test(hasNoneLetters("abcdef", "gh"), true, "contains none");
+        test(hasNoneLetters("ABCD", "def"), false, "pattern case insensitive overlap");
+        test(hasNoneLetters("abcd", "DEF"), false, "phrase case insensitive overlap");
+    }
+    
+    private static void test(boolean actual, boolean expected, String testName) {
+        if (actual != expected) {
+            String errorMessage = String.format(
+                "Test %s failed: %s is not equal to expected %s",
+                testName, 
+                actual,
+                expected);
+            System.out.println("ERROR: " + errorMessage);  
+        } else {
+            System.out.println("SUCCESS: " + testName + " passed");
+        }
+    }
+}
